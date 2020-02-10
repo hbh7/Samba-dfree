@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BASE_PATH=`pwd | cut -d "/" -f2`
+
+USED=$((`zfs get -o value -Hp used $BASE_PATH` / 1024)) > /dev/null
+AVAIL=$((`zfs get -o value -Hp available /$BASE_PATH` / 1024)) > /dev/null
+
+TOTAL=$(($USED+$AVAIL)) > /dev/null
+
+echo $TOTAL $AVAIL
